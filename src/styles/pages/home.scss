@@ -1,0 +1,11 @@
+.home {
+    &__select-bar {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+    }
+
+    &__toggle {
+        margin-right: 3rem;
+    }
+}

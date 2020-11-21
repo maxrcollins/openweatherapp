@@ -1,0 +1,35 @@
+
+.sr-only {  // Stole this from bootstrap because it works so well
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+
+.is-closed { 
+    display: none !important;
+}
+
+
+.button {
+    border: 0;
+    padding: 0.5rem 1rem;
+
+    &-primary {
+        background: $primary;
+        color: $white;
+
+        &:hover,
+        &:focus {
+            background: darken($primary, 10%);
+        }
+    }
+
+    &-rounded {
+        border-radius: 1rem;
+    }
+}

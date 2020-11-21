@@ -1,0 +1,11 @@
+
+@import './styles/vars.scss';
+@import './styles/theme.scss';
+@import './styles/util.scss';
+
+// page styles
+@import './styles/pages/home.scss';
+
+// component styles
+@import './styles/components/timeframe-toggle.scss';
+@import './styles/components/search-bar.scss';
