@@ -1,77 +1,120 @@
 <template>
-  <div>
-    <h1>{{ msg }}</h1>
-    <p>
-      Find out <i>weather</i> it's nice near you!
-      <!-- <a href="https://cli.vuejs.org" target="_blank" rel="noopener">vue-cli documentation</a>. -->
-    </p>
-    <div class="home__select-bar">
-      <TimeframeToggle class="home__toggle" />
+  <main class="home">
+    <div class="home__heading">
+      <h1>{{ msg }}</h1>
+      <h2>
+        Find out <i>weather</i> it's nice near you!
+      </h2>
+    </div>
+    <div class="home__select">
+      <div class="home__toggles">
+        <DropdownToggle
+          class="home__toggle"
+          prefix="Select Your Language:"
+          :label="$store.selections.language.name"
+          v-slot:default="slotProps"
+        >
+          <button
+            v-for="language in $actions.getLanguages()"
+            :key="language.id"
+            v-on:click="$actions.updateSelection({'language': language}); slotProps.toggleExpanded();"
+          >
+            {{language.name}}
+          </button>
+        </DropdownToggle>
+        <DropdownToggle
+          class="home__toggle"
+          prefix="Select Your Units:"
+          :label="$store.selections.metric.measurement"
+          v-slot:default="slotProps"
+        >
+          <button
+            v-for="metric in $actions.getMetrics()"
+            :key="metric.measurement"
+            v-on:click="$actions.updateSelection({'metric': metric}); slotProps.toggleExpanded();"
+          >
+            {{metric.measurement}}
+          </button>
+        </DropdownToggle>
+        <DropdownToggle
+          class="home__toggle"
+          prefix="View:"
+          :label="$store.selections.view"
+          v-slot:default="slotProps"
+        >
+          <button
+            v-for="view in $actions.getView()"
+            :key="view"
+            v-on:click="$actions.updateSelection({'view': view}); slotProps.toggleExpanded();"
+          >
+            {{view}}
+          </button>
+        </DropdownToggle>
+      </div>
       <SearchBar :onSubmit="apiCall" />
     </div>
-    <button v-on:click="apiCall">Click for call!</button>
-
-    <!-- <h3>Installed CLI Plugins</h3>
-    <ul>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-babel" target="_blank" rel="noopener">babel</a></li>
-      <li><a href="https://github.com/vuejs/vue-cli/tree/dev/packages/%40vue/cli-plugin-eslint" target="_blank" rel="noopener">eslint</a></li>
-    </ul>
-    <h3>Essential Links</h3>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank" rel="noopener">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank" rel="noopener">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank" rel="noopener">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank" rel="noopener">Twitter</a></li>
-      <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
-    </ul>
-    <h3>Ecosystem</h3>
-    <ul>
-      <li><a href="https://router.vuejs.org" target="_blank" rel="noopener">vue-router</a></li>
-      <li><a href="https://vuex.vuejs.org" target="_blank" rel="noopener">vuex</a></li>
-      <li><a href="https://github.com/vuejs/vue-devtools#vue-devtools" target="_blank" rel="noopener">vue-devtools</a></li>
-      <li><a href="https://vue-loader.vuejs.org" target="_blank" rel="noopener">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank" rel="noopener">awesome-vue</a></li>
-    </ul> -->
-  </div>
+    <div class="home__results">
+      <DailyWeatherDisplay v-if="weatherData" :data="weatherData.data.current" :city="undefined" />
+      <div v-for="city in cities" :key="city.name">
+        Did you mean:
+        <button v-on:click="apiCall(`${city.coord.lat},${city.coord.lon}`)">
+          {{city.name}}, {{city.sys.country}}
+        </button>?
+      </div>
+    </div>
+  </main>
 </template>
 
 <script>
-import { getWeatherByLocation } from '../api/openweather.js'
-import TimeframeToggle from './TimeframeToggle.vue'
-import SearchBar from './SearchBar.vue'
-
+import { getWeatherByLocation, returnCities } from '../api/openweather.js';
+import DropdownToggle from './DropdownToggle.vue';
+import DailyWeatherDisplay from './DailyWeatherDisplay.vue';
+import SearchBar from './SearchBar.vue';
 export default {
   name: 'Home',
   props: {
-    msg: String
+    msg: String,
   },
   components: {
-    TimeframeToggle,
-    SearchBar
+    DailyWeatherDisplay,
+    DropdownToggle,
+    SearchBar,
+  },
+  data() {
+    return {
+      weatherData: null,
+      cities: null,
+    };
   },
   methods: {
-    apiCall: async (location) => {
-      const test = await getWeatherByLocation(location)
-      console.log('test', test)
-    }
-  }
-}
+    async apiCall(location) {
+
+      const isCoordinates = /^(-?\d+(\.\d+)?),\s*(-?\d+(\.\d+)?)$/;
+
+      if (isCoordinates.test(location)) {
+        const coordinates = location.split(',');
+        this.weatherData = await getWeatherByLocation({
+          lat: coordinates[0].trim(),
+          lon: cooridnates[1].trim(),
+          language: this.$store.selections.language.id,
+          metric: this.$store.selections.metric.measurement,
+          view: this.$store.selections.view,
+        });
+        //console.log({this.weatherData});
+      }
+      else {
+        const citiesResponse = await returnCities(location);
+        this.cities = citiesResponse.data.list;
+        //console.log({this.cities});
+      }
+      // this.weatherData = await getWeatherByLocation({
+      //   location: location,
+      //   language: this.$store.selections.language.id,
+      //   metric: this.$store.selections.metric.measurement,
+      //   view: this.$store.selections.view,
+      // });
+    },
+  },
+};
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-h3 {
-  margin: 40px 0 0;
-}
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-a {
-  color: #42b983;
-}
-</style>

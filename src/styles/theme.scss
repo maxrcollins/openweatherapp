@@ -1,12 +1,35 @@
+body {
+    margin: 0;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+* {
+    box-sizing: border-box;
+    text-size-adjust: none;
+}
+
 #app {
     //font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-    text-align: center;
+    //text-align: center;
     //color: #2c3e50;
     //margin-top: 60px;
 }
 
+html {
+    background: $light-blue;
+}
 
+h1 {
+    font-size: $h1-font-size;
+    margin-bottom: 2rem;
+}
 
+h2 {
+    font-size: $h2-font-size;
+    margin-top: 0;
+}
 

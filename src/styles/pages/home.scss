@@ -1,11 +1,36 @@
 .home {
-    &__select-bar {
-        display: flex;
-        flex-direction: row;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+    &__heading {
+        flex: 0 0 100%;
+        margin-bottom: 3rem;
+    }
+
+    &__select {
+        //display: flex;
+        //flex-direction: row;
+        flex: 0 0 40%;
         justify-content: center;
     }
 
+    &__toggles {
+        display: flex;
+        justify-content: space-around;
+
+        margin-bottom: 3rem;
+    }
     &__toggle {
-        margin-right: 3rem;
+        //margin-right: 3rem;
+        flex: 0 0 30%;
+    }
+
+    &__results {
+        flex: 0 0 60%;
+        border: 1px solid $black;
+        border-radius: 1rem;
+        padding: 1rem;
+        background: $white;
     }
 }
