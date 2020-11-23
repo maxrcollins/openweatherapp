@@ -54,12 +54,12 @@
       <SearchBar :onSubmit="apiCall" />
     </div>
     <div class="home__results">
-      <DailyWeatherDisplay v-if="weatherData" :data="weatherData.data.current" :city="undefined" />
+      <CurrentWeatherDisplay v-if="weatherData && $store.selections.view === 'current'" :data="weatherData.data.current" :city="undefined" />
       <div v-for="city in cities" :key="city.name">
         Did you mean:
-        <button v-on:click="apiCall(`${city.coord.lat},${city.coord.lon}`)">
+        <button v-on:click="apiCall(`${city.coord.lat},${city.coord.lon}`)" class="a">
           {{city.name}}, {{city.sys.country}}
-        </button>?
+        </button>(lat: {{city.coord.lat}}, lon: {{city.coord.lon}}?
       </div>
     </div>
   </main>
@@ -68,7 +68,7 @@
 <script>
 import { getWeatherByLocation, returnCities } from '../api/openweather.js';
 import DropdownToggle from './DropdownToggle.vue';
-import DailyWeatherDisplay from './DailyWeatherDisplay.vue';
+import CurrentWeatherDisplay from './CurrentWeatherDisplay.vue';
 import SearchBar from './SearchBar.vue';
 export default {
   name: 'Home',
@@ -76,7 +76,7 @@ export default {
     msg: String,
   },
   components: {
-    DailyWeatherDisplay,
+    CurrentWeatherDisplay,
     DropdownToggle,
     SearchBar,
   },
@@ -93,13 +93,15 @@ export default {
 
       if (isCoordinates.test(location)) {
         const coordinates = location.split(',');
+        console.log('coordinates', coordinates);
         this.weatherData = await getWeatherByLocation({
           lat: coordinates[0].trim(),
-          lon: cooridnates[1].trim(),
+          lon: coordinates[1].trim(),
           language: this.$store.selections.language.id,
           metric: this.$store.selections.metric.measurement,
           view: this.$store.selections.view,
         });
+
         //console.log({this.weatherData});
       }
       else {

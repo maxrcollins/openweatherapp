@@ -8,9 +8,13 @@ $light-green: #42b983;
 $white: #fff;
 $black: #000;
 $dark-gray: #333;
-
+$transparent: #0000;
 
 // font
 $base-font-size: 1rem;
 $h1-font-size: $base-font-size * 4;
 $h2-font-size: $base-font-size * 1.5;
+
+
+// breakpoints
+$site-lg-breakpoint: 1350px;

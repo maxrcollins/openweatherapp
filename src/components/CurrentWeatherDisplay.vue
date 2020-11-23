@@ -12,7 +12,7 @@
 
 <script>
 export default {
-  name: 'DailyWeatherDisplay',
+  name: 'CurrentWeatherDisplay',
   props: {
     data: Object,
     city: String,

@@ -11,8 +11,6 @@ const OPEN_WEATHER_URLS = {
 const API_KEY = '67fd04927191a42983e665bbb8d50a0f'; // TODO Extract into proxy
 
 
-
-
 export const returnCities = (location) => {
   const url = `${OPEN_WEATHER_URLS.find}q=${location}&appid=${API_KEY}`;
   //console.log('url?', url)
@@ -44,9 +42,8 @@ export const handleLocation = (location) => {
 
 
 export const getWeatherByLocation = (props) => {
-  //console.log({props})
+  console.log({props})
   const { lat, lon, language = 'en', metric = 'standard' } = props;
-
   //const coordinates = location.split(',');
   //console.log({coordinates})
   //const locationCoordinates = handleLocation(location);
@@ -55,5 +52,6 @@ export const getWeatherByLocation = (props) => {
 
   const response = async () => await axios.get(url);
 
+  console.log({response})
   return response();
 };

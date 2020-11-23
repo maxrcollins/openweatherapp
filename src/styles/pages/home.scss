@@ -13,12 +13,16 @@
         //flex-direction: row;
         flex: 0 0 40%;
         justify-content: center;
+
+        @media only screen and (max-width: $site-lg-breakpoint) {
+            flex: 0 0 100%;
+        }
     }
 
     &__toggles {
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-around;
-
         margin-bottom: 3rem;
     }
     &__toggle {
@@ -32,5 +36,11 @@
         border-radius: 1rem;
         padding: 1rem;
         background: $white;
+
+        @media only screen and (max-width: $site-lg-breakpoint) {
+            flex: 0 0 100%;
+            margin-top: 2rem;
+            min-height: 10rem;
+        }
     }
 }

@@ -21,6 +21,6 @@
         background: lighten($primary, 10%);
         border: 1px solid $primary;
         max-height: 10rem;
-        overflow: scroll;
+        overflow: auto;
     }
 }

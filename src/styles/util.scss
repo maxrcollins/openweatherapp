@@ -14,25 +14,29 @@
     display: none !important;
 }
 
-
-.button {
-    border: 0;
-    padding: 0.5rem 1rem;
-
-    &-primary {
-        background: $primary;
-        color: $white;
-
-        &:hover,
-        &:focus {
-            background: darken($primary, 10%);
-        }
+.a {
+    // i.e. make a button look like an <a>
+    display: inline;
+    cursor: pointer;
+    text-align: inherit;
+    border: none;
+    padding: 0;
+  
+    // copied from bootstrap link reset css
+    color: $primary;
+    text-decoration: none;
+    background-color: $transparent;
+    -webkit-text-decoration-skip: objects; 
+  
+    &:hover {
+      color: $light-green;
+      text-decoration: underline;
     }
-
-    &-rounded {
-        border-radius: 1rem;
+  
+    &.active {
+      color: $light-green;
     }
-}
+  }
 
 .error-message {
     color: $red;

@@ -33,3 +33,22 @@ h2 {
     margin-top: 0;
 }
 
+
+.button {
+    border: 0;
+    padding: 0.5rem 1rem;
+
+    &-primary {
+        background: $primary;
+        color: $white;
+
+        &:hover,
+        &:focus {
+            background: darken($primary, 10%);
+        }
+    }
+
+    &-rounded {
+        border-radius: 1rem;
+    }
+}
