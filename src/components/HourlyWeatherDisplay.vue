@@ -1,20 +1,23 @@
 <template>
-  <div class="daily-weather-display">
-    <div class="daily-weather-display__row">
-      If you look up around{{city && ` ${city},` }} you will see: {{data.weather[0].description}}
-    </div>
-    <div>
-      Local Temp: {{data.temp}}&#176;{{$store.selections.metric.unit}}
-      Feels like: {{data.feels_like}}&#176;{{$store.selections.metric.unit}}
+  <div class="hourly-weather">
+    <div class="hourly-weather__body">
+      <div v-for="hourData in data" :key="hourData.dt">
+        <p>
+          {{hourData.dt}},
+          {{hourData.weather[0].description}},
+          Temp: {{hourData.temp}}&#176;{{$store.selections.metric.unit}},
+          Windspeed: {{hourData.wind_speed}}{{$store.selections.metric.speed}}
+        </p>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'CurrentWeatherDisplay',
+  name: 'HourlyWeatherDisplay',
   props: {
-    data: Object,
+    data: Array,
     city: String,
   },
 };

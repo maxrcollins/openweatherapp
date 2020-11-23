@@ -1,7 +1,7 @@
 <template>
   <main class="home">
     <div class="home__heading">
-      <h1>{{ msg }}</h1>
+      <h1>Weather It's Nice Out</h1>
       <h2>
         Find out <i>weather</i> it's nice near you!
       </h2>
@@ -31,7 +31,7 @@
           <button
             v-for="metric in $actions.getMetrics()"
             :key="metric.measurement"
-            v-on:click="$actions.updateSelection({'metric': metric}); slotProps.toggleExpanded();"
+            v-on:click="$actions.updateSelection({'metric': metric}); if (weatherData){apiCall(`${weatherData.data.lat},${weatherData.data.lon}`)}; slotProps.toggleExpanded();"
           >
             {{metric.measurement}}
           </button>
@@ -59,7 +59,14 @@
           v-if="weatherData && $store.selections.view === 'current'" :data="weatherData.data.current"
           :city="cityName"
         />
-
+        <HourlyWeatherDisplay
+          v-if="weatherData && $store.selections.view === 'hourly'" :data="weatherData.data.hourly"
+          :city="cityName"
+        />
+        <DailyWeatherDisplay
+          v-if="weatherData && $store.selections.view === 'daily'" :data="weatherData.data.daily"
+          :city="cityName"
+        />
         <div v-if="cities !== undefined && weatherData === undefined">
           <div v-for="city in cities" :key="city.lat">
             Did you mean:
@@ -86,14 +93,15 @@
 import { getDataByCoordinates, getDataByQuery } from '../api/openweather.js';
 import DropdownToggle from './DropdownToggle.vue';
 import CurrentWeatherDisplay from './CurrentWeatherDisplay.vue';
+import HourlyWeatherDisplay from './HourlyWeatherDisplay.vue';
+import DailyWeatherDisplay from './DailyWeatherDisplay.vue';
 import SearchBar from './SearchBar.vue';
 export default {
   name: 'Home',
-  props: {
-    msg: String,
-  },
   components: {
     CurrentWeatherDisplay,
+    HourlyWeatherDisplay,
+    DailyWeatherDisplay,
     DropdownToggle,
     SearchBar,
   },
@@ -126,7 +134,9 @@ export default {
       }
       else {
         const citiesResponse = await getDataByQuery(location);
+        console.log('citiesResponse', citiesResponse);
         if (citiesResponse.data.list.length === 1) {
+          this.cityName = citiesResponse.data.list[0].name;
           this.weatherData = await getDataByCoordinates({
             lat: citiesResponse.data.list[0].coord.lat,
             lon: citiesResponse.data.list[0].coord.lon,
@@ -134,6 +144,7 @@ export default {
             metric: this.$store.selections.metric.measurement,
             view: this.$store.selections.view,
           });
+          console.log('weatherData', this.weatherData);
         }
         else {
           this.cities = citiesResponse.data.list;
