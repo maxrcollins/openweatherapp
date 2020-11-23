@@ -31,7 +31,11 @@
           <button
             v-for="metric in $actions.getMetrics()"
             :key="metric.measurement"
-            v-on:click="$actions.updateSelection({'metric': metric}); if (weatherData){apiCall(`${weatherData.data.lat},${weatherData.data.lon}`)}; slotProps.toggleExpanded();"
+            v-on:click="
+              $actions.updateSelection({'metric': metric});
+              if (weatherData){apiCall(`${weatherData.data.lat},${weatherData.data.lon}`)};
+              slotProps.toggleExpanded();
+            "
           >
             {{metric.measurement}}
           </button>
@@ -91,11 +95,11 @@
 
 <script>
 import { getDataByCoordinates, getDataByQuery } from '../api/openweather.js';
-import DropdownToggle from './DropdownToggle.vue';
-import CurrentWeatherDisplay from './CurrentWeatherDisplay.vue';
-import HourlyWeatherDisplay from './HourlyWeatherDisplay.vue';
-import DailyWeatherDisplay from './DailyWeatherDisplay.vue';
-import SearchBar from './SearchBar.vue';
+import DropdownToggle from '../components/DropdownToggle.vue';
+import CurrentWeatherDisplay from '../components/CurrentWeatherDisplay.vue';
+import HourlyWeatherDisplay from '../components/HourlyWeatherDisplay.vue';
+import DailyWeatherDisplay from '../components/DailyWeatherDisplay.vue';
+import SearchBar from '../components/SearchBar.vue';
 export default {
   name: 'Home',
   components: {
