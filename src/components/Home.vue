@@ -53,35 +53,37 @@
       </div>
       <SearchBar :onSubmit="apiCall" />
     </div>
-    <div class="home__results">
-      <CurrentWeatherDisplay
-        v-if="weatherData && $store.selections.view === 'current'" :data="weatherData.data.current"
-        :city="cityName"
-      />
+    <div class="home__results-container">
+      <div class="home__results">
+        <CurrentWeatherDisplay
+          v-if="weatherData && $store.selections.view === 'current'" :data="weatherData.data.current"
+          :city="cityName"
+        />
 
-      <div v-if="cities !== undefined && weatherData === undefined">
-        <div v-for="city in cities" :key="city.lat">
-          Did you mean:
-          <button
-            v-on:click="
-              cityName = city.name;
-              cities = undefined;
-              apiCall(`${city.coord.lat},${city.coord.lon}`)
-            "
-            class="a"
-          >
-            {{city.name}}, {{city.sys.country}}
-          </button>(lat: {{city.coord.lat}}, lon: {{city.coord.lon}}?
+        <div v-if="cities !== undefined && weatherData === undefined">
+          <div v-for="city in cities" :key="city.lat">
+            Did you mean:
+            <button
+              v-on:click="
+                cityName = city.name;
+                cities = undefined;
+                apiCall(`${city.coord.lat},${city.coord.lon}`)
+              "
+              class="a"
+            >
+              {{city.name}}, {{city.sys.country}}
+            </button>(lat: {{city.coord.lat}}, lon: {{city.coord.lon}}?
+          </div>
         </div>
-      </div>
 
-      {{(cities && cities.length === 0) ? 'No Results Found': null}}
+        {{(cities && cities.length === 0) ? 'No Results Found': null}}
+      </div>
     </div>
   </main>
 </template>
 
 <script>
-import { getWeatherByLocation, returnCities } from '../api/openweather.js';
+import { getDataByCoordinates, getDataByQuery } from '../api/openweather.js';
 import DropdownToggle from './DropdownToggle.vue';
 import CurrentWeatherDisplay from './CurrentWeatherDisplay.vue';
 import SearchBar from './SearchBar.vue';
@@ -114,7 +116,7 @@ export default {
 
       if (isCoordinates.test(location)) {
         const coordinates = location.split(',');
-        this.weatherData = await getWeatherByLocation({
+        this.weatherData = await getDataByCoordinates({
           lat: coordinates[0].trim(),
           lon: coordinates[1].trim(),
           language: this.$store.selections.language.id,
@@ -123,8 +125,19 @@ export default {
         });
       }
       else {
-        const citiesResponse = await returnCities(location);
-        this.cities = citiesResponse.data.list;
+        const citiesResponse = await getDataByQuery(location);
+        if (citiesResponse.data.list.length === 1) {
+          this.weatherData = await getDataByCoordinates({
+            lat: citiesResponse.data.list[0].coord.lat,
+            lon: citiesResponse.data.list[0].coord.lon,
+            language: this.$store.selections.language.id,
+            metric: this.$store.selections.metric.measurement,
+            view: this.$store.selections.view,
+          });
+        }
+        else {
+          this.cities = citiesResponse.data.list;
+        }
       }
     },
   },

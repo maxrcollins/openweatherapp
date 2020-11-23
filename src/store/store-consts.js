@@ -269,6 +269,7 @@ export const defaultSelections = {
       measurement: 'standard',
       unit: 'K',
     },
+    inputValue: '',
   },
 };
 

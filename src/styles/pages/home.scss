@@ -22,7 +22,7 @@
     &__toggles {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-around;
+        justify-content: space-between;
         margin-bottom: 3rem;
     }
     &__toggle {
@@ -30,17 +30,26 @@
         flex: 0 0 30%;
     }
 
-    &__results {
+    &__results-container {
         flex: 0 0 60%;
-        border: 1px solid $black;
-        border-radius: 1rem;
-        padding: 1rem;
-        background: $white;
-
+ 
         @media only screen and (max-width: $site-lg-breakpoint) {
             flex: 0 0 100%;
             margin-top: 2rem;
             min-height: 10rem;
+        }       
+    }
+
+    &__results {
+        height: 100%;
+        border: 1px solid $black;
+        border-radius: 1rem;
+        padding: 1rem;
+        background: $white;
+        margin-left: 2rem;
+
+        @media only screen and (max-width: $site-lg-breakpoint) {
+            margin-left: 0;
         }
     }
 }

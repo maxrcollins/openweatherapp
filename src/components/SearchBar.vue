@@ -15,6 +15,7 @@
           class="search-bar__input"
           ref="location_input"
           aria-describedby="search-bar-error"
+          v-model="inputValue"
         />
         <button class="button button-primary search-bar__search" type="submit">
           Search!
@@ -31,6 +32,16 @@ export default {
   props: {
     onSubmit: Function,
     classNames: String,
+  },
+  data() {
+    return {
+      inputValue: this.$store.selections.inputValue,
+    };
+  },
+  watch: {
+    inputValue: function(value) {
+      this.$actions.updateSelection({ inputValue: value });
+    },
   },
   methods: {
     submitForm: function() {
