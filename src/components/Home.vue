@@ -54,13 +54,28 @@
       <SearchBar :onSubmit="apiCall" />
     </div>
     <div class="home__results">
-      <CurrentWeatherDisplay v-if="weatherData && $store.selections.view === 'current'" :data="weatherData.data.current" :city="undefined" />
-      <div v-for="city in cities" :key="city.name">
-        Did you mean:
-        <button v-on:click="apiCall(`${city.coord.lat},${city.coord.lon}`)" class="a">
-          {{city.name}}, {{city.sys.country}}
-        </button>(lat: {{city.coord.lat}}, lon: {{city.coord.lon}}?
+      <CurrentWeatherDisplay
+        v-if="weatherData && $store.selections.view === 'current'" :data="weatherData.data.current"
+        :city="cityName"
+      />
+
+      <div v-if="cities !== undefined && weatherData === undefined">
+        <div v-for="city in cities" :key="city.lat">
+          Did you mean:
+          <button
+            v-on:click="
+              cityName = city.name;
+              cities = undefined;
+              apiCall(`${city.coord.lat},${city.coord.lon}`)
+            "
+            class="a"
+          >
+            {{city.name}}, {{city.sys.country}}
+          </button>(lat: {{city.coord.lat}}, lon: {{city.coord.lon}}?
+        </div>
       </div>
+
+      {{(cities && cities.length === 0) ? 'No Results Found': null}}
     </div>
   </main>
 </template>
@@ -82,18 +97,23 @@ export default {
   },
   data() {
     return {
-      weatherData: null,
-      cities: null,
+      weatherData: undefined,
+      cities: undefined,
+      cityName: undefined,
     };
   },
   methods: {
+    clearData() {
+      this.weatherData = undefined;
+      this.cities = undefined;
+      this.cityName = undefined;
+    },
     async apiCall(location) {
-
+      this.clearData();
       const isCoordinates = /^(-?\d+(\.\d+)?),\s*(-?\d+(\.\d+)?)$/;
 
       if (isCoordinates.test(location)) {
         const coordinates = location.split(',');
-        console.log('coordinates', coordinates);
         this.weatherData = await getWeatherByLocation({
           lat: coordinates[0].trim(),
           lon: coordinates[1].trim(),
@@ -101,20 +121,11 @@ export default {
           metric: this.$store.selections.metric.measurement,
           view: this.$store.selections.view,
         });
-
-        //console.log({this.weatherData});
       }
       else {
         const citiesResponse = await returnCities(location);
         this.cities = citiesResponse.data.list;
-        //console.log({this.cities});
       }
-      // this.weatherData = await getWeatherByLocation({
-      //   location: location,
-      //   language: this.$store.selections.language.id,
-      //   metric: this.$store.selections.metric.measurement,
-      //   view: this.$store.selections.view,
-      // });
     },
   },
 };

@@ -34,7 +34,6 @@ export default {
   },
   methods: {
     submitForm: function() {
-      console.log('this', this.$refs);
       this.$refs?.location_input?.value ?
         this.onSubmit(this.$refs.location_input.value) :
         console.log('Please enter a location'); // ADD Error handlingTHIS;
