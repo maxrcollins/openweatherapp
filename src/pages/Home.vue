@@ -19,7 +19,7 @@
             :key="language.id"
             v-on:click="$actions.updateSelection({'language': language}); slotProps.toggleExpanded();"
           >
-            {{language.name}}
+            {{ language.name }}
           </button>
         </DropdownToggle>
         <DropdownToggle
@@ -37,7 +37,7 @@
               slotProps.toggleExpanded();
             "
           >
-            {{metric.measurement}}
+            {{ metric.measurement }}
           </button>
         </DropdownToggle>
         <DropdownToggle
@@ -51,7 +51,7 @@
             :key="view"
             v-on:click="$actions.updateSelection({'view': view}); slotProps.toggleExpanded();"
           >
-            {{view}}
+            {{ view }}
           </button>
         </DropdownToggle>
       </div>
@@ -60,15 +60,20 @@
     <div class="home__results-container">
       <div class="home__results">
         <CurrentWeatherDisplay
-          v-if="weatherData && $store.selections.view === 'current'" :data="weatherData.data.current"
+          v-if="weatherData && $store.selections.view === 'current'"
+          :data="weatherData.data.current"
+          :timeZone="{label:weatherData.data.timezone, offset: weatherData.data.timezone_offset}"
           :city="cityName"
         />
         <HourlyWeatherDisplay
-          v-if="weatherData && $store.selections.view === 'hourly'" :data="weatherData.data.hourly"
+          v-if="weatherData && $store.selections.view === 'hourly'"
+          :data="weatherData.data.hourly"
+          :timeZone="{label:weatherData.data.timezone, offset: weatherData.data.timezone_offset}"
           :city="cityName"
         />
         <DailyWeatherDisplay
           v-if="weatherData && $store.selections.view === 'daily'" :data="weatherData.data.daily"
+          :timeZone="{label:weatherData.data.timezone, offset: weatherData.data.timezone_offset}"
           :city="cityName"
         />
         <div v-if="cities !== undefined && weatherData === undefined">
@@ -82,12 +87,12 @@
               "
               class="a"
             >
-              {{city.name}}, {{city.sys.country}}
-            </button>(lat: {{city.coord.lat}}, lon: {{city.coord.lon}}?
+              {{ city.name }}, {{ city.sys.country }}
+            </button>(lat: {{ city.coord.lat }}, lon: {{ city.coord.lon }}?
           </div>
         </div>
 
-        {{(cities && cities.length === 0) ? 'No Results Found': null}}
+        {{ (cities && cities.length === 0) ? 'No Results Found': null }}
       </div>
     </div>
   </main>
@@ -135,6 +140,7 @@ export default {
           metric: this.$store.selections.metric.measurement,
           view: this.$store.selections.view,
         });
+
       }
       else {
         const citiesResponse = await getDataByQuery(location);

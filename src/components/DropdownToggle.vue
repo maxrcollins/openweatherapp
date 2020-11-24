@@ -1,6 +1,6 @@
 <template>
   <div class="dropdown-toggle" v-bind:class="className">
-    {{prefix}}
+    {{ prefix }}
     <button
       id="dropdownMenuButton"
       class="button button-primary button-rounded dropdown-toggle__dropdown-button"
@@ -8,7 +8,7 @@
       :aria-expanded="isExpanded.toString()"
       v-on:click="toggleExpanded()"
     >
-      {{label}}
+      {{ label }}
     </button>
     <div
       class="dropdown-toggle__dropdown-menu"

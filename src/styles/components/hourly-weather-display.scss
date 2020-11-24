@@ -1,0 +1,10 @@
+.hourly-weather {
+    &__date {
+        display: block;
+    }
+
+    &__data {
+        display: block;
+        margin-left: 2rem;
+    }
+}
