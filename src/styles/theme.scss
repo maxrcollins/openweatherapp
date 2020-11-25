@@ -48,6 +48,15 @@ h2 {
         }
     }
 
+    &-secondary {
+        background: $secondary;
+
+        &:hover,
+        &:focus {
+            background: darken($secondary, 10%);
+        }
+    }
+
     &-rounded {
         border-radius: 1rem;
     }

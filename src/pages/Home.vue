@@ -6,7 +6,7 @@
         Find out <i>weather</i> it's nice near you!
       </h2>
     </div>
-    <div class="home__select">
+    <div class="home__select" v-if="$store.selections">
       <div class="home__toggles">
         <DropdownToggle
           class="home__toggle"
@@ -15,6 +15,7 @@
           v-slot:default="slotProps"
         >
           <button
+            class="button button-secondary button-rounded home__dropdown-button"
             v-for="language in $actions.getLanguages()"
             :key="language.id"
             v-on:click="$actions.updateSelection({'language': language}); slotProps.toggleExpanded();"
@@ -29,6 +30,7 @@
           v-slot:default="slotProps"
         >
           <button
+            class="button button-secondary button-rounded home__dropdown-button"
             v-for="metric in $actions.getMetrics()"
             :key="metric.measurement"
             v-on:click="
@@ -47,6 +49,7 @@
           v-slot:default="slotProps"
         >
           <button
+            class="button button-secondary button-rounded home__dropdown-button"
             v-for="view in $actions.getView()"
             :key="view"
             v-on:click="$actions.updateSelection({'view': view}); slotProps.toggleExpanded();"
@@ -60,25 +63,25 @@
     <div class="home__results-container">
       <div class="home__results">
         <CurrentWeatherDisplay
-          v-if="weatherData && $store.selections.view === 'current'"
+          v-if="weatherData && $store.selections.view === 'Current'"
           :data="weatherData.data.current"
           :timeZone="{label:weatherData.data.timezone, offset: weatherData.data.timezone_offset}"
           :city="cityName"
         />
         <HourlyWeatherDisplay
-          v-if="weatherData && $store.selections.view === 'hourly'"
+          v-if="weatherData && $store.selections.view === 'Hourly'"
           :data="weatherData.data.hourly"
           :timeZone="{label:weatherData.data.timezone, offset: weatherData.data.timezone_offset}"
           :city="cityName"
         />
         <DailyWeatherDisplay
-          v-if="weatherData && $store.selections.view === 'daily'" :data="weatherData.data.daily"
+          v-if="weatherData && $store.selections.view === 'Daily'" :data="weatherData.data.daily"
           :timeZone="{label:weatherData.data.timezone, offset: weatherData.data.timezone_offset}"
           :city="cityName"
         />
         <div v-if="cities !== undefined && weatherData === undefined">
           <div v-for="city in cities" :key="city.lat">
-            Did you mean:
+            Did you mean: {{city.name}}
             <button
               v-on:click="
                 cityName = city.name;
@@ -105,6 +108,7 @@ import CurrentWeatherDisplay from '../components/CurrentWeatherDisplay.vue';
 import HourlyWeatherDisplay from '../components/HourlyWeatherDisplay.vue';
 import DailyWeatherDisplay from '../components/DailyWeatherDisplay.vue';
 import SearchBar from '../components/SearchBar.vue';
+
 export default {
   name: 'Home',
   components: {
@@ -122,13 +126,12 @@ export default {
     };
   },
   methods: {
-    clearData() {
+    clearWeatherCities() {
       this.weatherData = undefined;
       this.cities = undefined;
-      this.cityName = undefined;
     },
     async apiCall(location) {
-      this.clearData();
+      this.clearWeatherCities();
       const isCoordinates = /^(-?\d+(\.\d+)?),\s*(-?\d+(\.\d+)?)$/;
 
       if (isCoordinates.test(location)) {
@@ -144,8 +147,8 @@ export default {
       }
       else {
         const citiesResponse = await getDataByQuery(location);
-        console.log('citiesResponse', citiesResponse);
         if (citiesResponse.data.list.length === 1) {
+          //console.log('cities', citiesResponse.data.list[0].name)
           this.cityName = citiesResponse.data.list[0].name;
           this.weatherData = await getDataByCoordinates({
             lat: citiesResponse.data.list[0].coord.lat,
@@ -154,7 +157,6 @@ export default {
             metric: this.$store.selections.metric.measurement,
             view: this.$store.selections.view,
           });
-          console.log('weatherData', this.weatherData);
         }
         else {
           this.cities = citiesResponse.data.list;

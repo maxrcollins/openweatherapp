@@ -5,17 +5,17 @@
 
 export const metrics = [
   {
-    measurement: 'standard',
+    measurement: 'Standard',
     unit: 'K',
     speed: 'km/h',
   },
   {
-    measurement: 'metric',
+    measurement: 'Metric',
     unit: 'C',
     speed: 'km/h',
   },
   {
-    measurement: 'imperial',
+    measurement: 'Imperial',
     unit: 'F',
     speed: 'mph',
   },
@@ -209,9 +209,9 @@ export const languages = [
 ];
 
 export const view = [
-  'current',
-  'hourly',
-  'daily',
+  'Current',
+  'Hourly',
+  'Daily',
 ];
 
 export const defaultSelections = {
@@ -220,10 +220,9 @@ export const defaultSelections = {
       name: 'English',
       id: 'en',
     },
-    metric: 'standard',
     view: 'current',
     metric: {
-      measurement: 'standard',
+      measurement: 'Standard',
       unit: 'K',
       speed: 'km/h',
     },

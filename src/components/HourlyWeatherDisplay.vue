@@ -6,8 +6,8 @@
           <span class="hourly-weather__date">{{ $utils.formatDateObj(hourData.dt, timeZone, true, false, true) }}</span>
           <span class="hourly-weather__data">
             {{ hourData.weather[0].description }},
-            Temp: {{ hourData.temp }}&#176;{{ $store.selections.metric.unit }},
-            Windspeed: {{ hourData.wind_speed }}{{ $store.selections.metric.speed }}
+            <span class="bold">Temp:</span> {{ hourData.temp }}&#176;{{ $store.selections.metric.unit }},
+            <span class="bold">Windspeed:</span> {{ hourData.wind_speed }}{{ $store.selections.metric.speed }}
           </span>
         </p>
       </div>

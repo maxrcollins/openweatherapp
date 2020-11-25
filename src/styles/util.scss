@@ -1,43 +1,43 @@
 
 .sr-only {  // Stole this from bootstrap because it works so well
-    border: 0;
-    clip: rect(0, 0, 0, 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
 }
 
 .is-closed { 
-    display: none !important;
+  display: none !important;
 }
 
 .a {
-    // i.e. make a button look like an <a>
-    display: inline;
-    cursor: pointer;
-    text-align: inherit;
-    border: none;
-    padding: 0;
-  
-    // copied from bootstrap link reset css
-    color: $primary;
-    text-decoration: none;
-    background-color: $transparent;
-    -webkit-text-decoration-skip: objects; 
-  
-    &:hover {
-      color: $light-green;
-      text-decoration: underline;
-    }
-  
-    &.active {
-      color: $light-green;
-    }
+  // i.e. make a button look like an <a>
+  display: inline;
+  cursor: pointer;
+  text-align: inherit;
+  border: none;
+  padding: 0;
+
+  // copied from bootstrap link reset css
+  color: $primary;
+  text-decoration: none;
+  background-color: $transparent;
+  -webkit-text-decoration-skip: objects; 
+
+  &:hover {
+    color: $secondary;
+    text-decoration: underline;
   }
 
-.error-message {
-    color: $red;
+  &.active {
+    color: $secondary;
+  }
+}
+
+.bold {
+  font-weight: 700;
 }

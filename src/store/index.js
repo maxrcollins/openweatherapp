@@ -8,10 +8,8 @@ import {
 } from './store-consts.js';
 
 
-
 // init local store
-if (getLocalStore('selections').length === 0) { setLocalStore('selections', defaultSelections) }
-
+if (Object.keys(getLocalStore('selections')).length === 0) { setLocalStore('selections', defaultSelections) }
 
 const store = Vue.observable(getLocalStore('selections'));
 

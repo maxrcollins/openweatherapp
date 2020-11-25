@@ -22,5 +22,7 @@
         border: 1px solid $primary;
         max-height: 10rem;
         overflow: auto;
+        border-bottom-left-radius: 15%;
+        border-bottom-right-radius: 15%;
     }
 }

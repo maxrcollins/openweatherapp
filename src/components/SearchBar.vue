@@ -11,22 +11,22 @@
           type="text"
           id="location-input"
           name="location-input"
-          placeholder="leave empty for current"
+          placeholder="leave empty for current location"
           class="search-bar__input"
           ref="location_input"
-          aria-describedby="search-bar-error"
           v-model="inputValue"
         />
         <button class="button button-primary search-bar__search" type="submit">
           Search!
         </button>
       </div>
-      <div class="error-message" id="search-bar-error">Please enter a location</div>
     </form>
   </div>
 </template>
 
 <script>
+import getPosition from '../api/geolocation.js'; // ******
+
 export default {
   name: 'SearchBar',
   props: {
@@ -44,10 +44,11 @@ export default {
     },
   },
   methods: {
-    submitForm: function() {
+    submitForm: async function() {
+
       this.$refs?.location_input?.value ?
         this.onSubmit(this.$refs.location_input.value) :
-        console.log('Please enter a location'); // ADD Error handlingTHIS;
+        console.log('ADD Error handling'); // ******
     },
   },
 };

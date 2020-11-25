@@ -41,6 +41,10 @@
         }       
     }
 
+    &__dropdown-button {
+        margin-bottom: 0.5rem;
+    }
+    
     &__results {
         height: 100%;
         border: 1px solid $black;
