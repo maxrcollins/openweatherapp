@@ -7,7 +7,11 @@ function formatDateObj(UNIXdate, timeZone, includeTime = false, includeDate = fa
   if (includeTime === false && includeDate === false && includeTimeZone === false) return localizedDate.toLocaleString();
 
   const date = `${localizedDate.getMonth() + 1}/${localizedDate.getDate()}`;
-  const time = `${(localizedDate.getHours() < 10 ? '0' : '') + localizedDate.getHours()}:${(localizedDate.getMinutes() < 10 ? '0' : '') + localizedDate.getMinutes()}`;
+  const time = `
+    ${(localizedDate.getHours() < 10 ? '0' : '') +
+    localizedDate.getHours()}:${(localizedDate.getMinutes() < 10 ? '0' : '') +
+    localizedDate.getMinutes()}
+  `;
 
   return `${includeTime ? time : ''}${includeDate ? ` ${date}` : ''}${includeTimeZone ? ` ${timeZone.label}` : ''}`;
 }

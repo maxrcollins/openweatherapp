@@ -8,6 +8,6 @@ export default function getGeoLocation(callbackFunction) {
   }
   else {
     // Handle
-    console.log('load failed');
+    console.log('load failed ');
   }
 }
