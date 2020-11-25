@@ -1,0 +1,19 @@
+.sun {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 170px;
+  width: 170px;
+  background-image: radial-gradient(circle 190px at 0% 10%, white, yellow, transparent, transparent);
+  z-index: -1;
+}
+
+.moon {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 170px;
+  width: 170px;
+  background-image: radial-gradient(circle 190px at 90% 10%, #666 25%, #999 50%, transparent 53%);
+  z-index: -1;
+}

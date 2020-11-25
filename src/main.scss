@@ -2,6 +2,7 @@
 @import './styles/vars.scss';
 @import './styles/theme.scss';
 @import './styles/util.scss';
+@import './styles/fonts.scss';
 
 // page styles
 @import './styles/pages/home.scss';
@@ -11,3 +12,5 @@
 @import './styles/components/search-bar.scss';
 @import './styles/components/current-weather-display.scss';
 @import './styles/components/hourly-weather-display.scss';
+@import './styles/components/daily-weather-display.scss';
+@import './styles/components/celestial-body.scss';

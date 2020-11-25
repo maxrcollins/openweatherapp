@@ -2,7 +2,6 @@ import Vue from 'vue';
 import { getLocalStore, setLocalStore } from './browser-local-store.js';
 import {
   metrics,
-  languages,
   view,
   defaultSelections,
 } from './store-consts.js';
@@ -22,7 +21,6 @@ const actions = {
     store.selections = { ...store.selections, ...newSelection };
     setLocalStore('selections', store);
   },
-  getLanguages() { return languages },
   getMetrics() { return metrics },
   getView() { return view },
 };

@@ -11,7 +11,6 @@ export const setLocalStore = (name = 'store', data) => {      // Wrap in debounc
 export const getLocalStore = (name = 'store') => {
 
   try {
-    //if (get(window, 'config.disableLocalStorage')) return {};
     return JSON.parse(window.localStorage.getItem(name)) || {};
   }
   catch {

@@ -1,0 +1,44 @@
+
+@font-face {
+  font-family: Font;
+  src: url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
+}
+
+// @font-face {
+//     font-family: ProzaLibre,
+//     src: url()
+// };
+div {
+  font-family: Font
+}
+
+// @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;700&display=swap');
+
+
+// @include font-face('Prudential Modern', $asset-path + 'fonts/PrudentialModern-Bold') {
+//   font-weight: $font-weight-bold;
+//   font-style: normal;
+// }
+
+// @include font-face('Prudential Modern', $asset-path + 'fonts/PrudentialModern-Medium') {
+//   font-weight: $font-weight-medium;
+//   font-style: normal;
+// }
+
+// @include font-face('Prudential Modern', $asset-path + 'fonts/PrudentialModern-BoldCondensed') {
+//   font-weight: $font-weight-bold;
+//   font-stretch: condensed;
+//   font-style: normal;
+// }
+
+// @include font-face('Prudential Modern', $asset-path + 'fonts/PrudentialModern-BoldSemiCondensed') {
+//   font-weight: $font-weight-bold;
+//   font-stretch: semi-condensed;
+//   font-style: normal;
+// }
+
+// @include font-face('Prudential Modern', $asset-path + 'fonts/PrudentialModern-Condensed') {
+//   font-weight: $font-weight-normal;
+//   font-stretch: condensed;
+//   font-style: normal;
+// }

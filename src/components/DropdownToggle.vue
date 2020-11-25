@@ -3,7 +3,7 @@
     {{ prefix }}
     <button
       id="dropdownMenuButton"
-      class="button button-primary button-rounded dropdown-toggle__dropdown-button"
+      class="button button-primary dropdown-toggle__dropdown-button"
       type="button"
       :aria-expanded="isExpanded.toString()"
       v-on:click="toggleExpanded()"
@@ -12,7 +12,7 @@
     </button>
     <div
       class="dropdown-toggle__dropdown-menu"
-      v-bind:class="!isExpanded && 'is-closed'"
+      v-bind:class="!isExpanded && 'is-hidden'"
       aria-labelledby="dropdownMenuButton"
     >
       <slot v-bind:toggleExpanded="toggleExpanded" />

@@ -25,8 +25,6 @@
 </template>
 
 <script>
-import getPosition from '../api/geolocation.js'; // ******
-
 export default {
   name: 'SearchBar',
   props: {
@@ -45,10 +43,7 @@ export default {
   },
   methods: {
     submitForm: async function() {
-
-      this.$refs?.location_input?.value ?
-        this.onSubmit(this.$refs.location_input.value) :
-        console.log('ADD Error handling'); // ******
+      this.onSubmit(this.$refs.location_input.value);
     },
   },
 };

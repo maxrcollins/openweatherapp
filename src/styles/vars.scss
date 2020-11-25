@@ -3,11 +3,13 @@
 $primary: #091fb0;
 $red: #d41730;
 $light-blue: #6bc9ff;
+$dark-blue: #010175;
 $secondary: #42b983;
 
 $white: #fff;
 $black: #000;
 $dark-gray: #333;
+$light-gray: #ddd;
 $transparent: #0000;
 
 // font
@@ -18,3 +20,9 @@ $h2-font-size: $base-font-size * 1.5;
 
 // breakpoints
 $site-lg-breakpoint: 1350px;
+$site-sm-breakpoint: 650px;
+
+
+// general
+
+$box-shadow: 0 0 0.375rem rgba($black, 0.4);

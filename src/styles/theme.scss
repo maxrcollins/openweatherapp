@@ -1,8 +1,7 @@
 body {
     margin: 0;
-    width: 90%;
-    margin-left: auto;
-    margin-right: auto;
+    background: linear-gradient(to right, $light-blue , $dark-blue);
+    //overflow: hidden;
 }
 
 * {
@@ -14,17 +13,20 @@ body {
     //font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow: hidden;
+    position: relative;
     //text-align: center;
     //color: #2c3e50;
     //margin-top: 60px;
 }
 
-html {
-    background: $light-blue;
-}
+// html {
+//     background: $light-blue;
+// }
 
 h1 {
     font-size: $h1-font-size;
+    margin-top: 0;
     margin-bottom: 2rem;
 }
 
@@ -37,6 +39,8 @@ h2 {
 .button {
     border: 0;
     padding: 0.5rem 1rem;
+    border-radius: 4px;
+    box-shadow: $box-shadow;
 
     &-primary {
         background: $primary;
@@ -55,9 +59,5 @@ h2 {
         &:focus {
             background: darken($secondary, 10%);
         }
-    }
-
-    &-rounded {
-        border-radius: 1rem;
     }
 }

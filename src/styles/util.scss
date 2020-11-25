@@ -10,8 +10,14 @@
   width: 1px;
 }
 
-.is-closed { 
+.is-hidden { 
   display: none !important;
+}
+
+.d-sm-none {
+  @media only screen and (max-width: $site-sm-breakpoint) {
+    display: none !important;
+  }
 }
 
 .a {

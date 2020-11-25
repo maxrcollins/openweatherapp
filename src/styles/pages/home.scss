@@ -1,28 +1,34 @@
 .home {
-    width: 100%;
     display: flex;
     flex-wrap: wrap;
+
+    width: 90%;
+    margin: 3rem auto;
 
     &__heading {
         flex: 0 0 100%;
         margin-bottom: 3rem;
+        text-align: center;
     }
 
     &__select {
-        //display: flex;
-        //flex-direction: row;
         flex: 0 0 40%;
         justify-content: center;
 
         @media only screen and (max-width: $site-lg-breakpoint) {
             flex: 0 0 100%;
+            background-color: $light-gray;
+            padding: 1rem;
+            border-radius: 4px;
+            box-shadow: $box-shadow;
+            border: 1px solid $black;
         }
     }
 
     &__toggles {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-between;
+        justify-content: space-around;
         margin-bottom: 3rem;
     }
     &__toggle {
@@ -48,13 +54,24 @@
     &__results {
         height: 100%;
         border: 1px solid $black;
-        border-radius: 1rem;
+        border-radius: 4px;
+        box-shadow: $box-shadow;
         padding: 1rem;
-        background: $white;
+        background: $light-gray;
         margin-left: 2rem;
 
         @media only screen and (max-width: $site-lg-breakpoint) {
             margin-left: 0;
         }
+    }
+
+    &__results-city {
+        margin-bottom: 1rem;
+    }
+    &__sun {
+        position: absolute;
+        top: 0;
+        transform: translate(50%, -50%);
+        right: 0;
     }
 }
