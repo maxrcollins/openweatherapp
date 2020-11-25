@@ -1,7 +1,7 @@
 <template>
   <div class="hourly-weather">
     <div class="hourly-weather__body">
-      <div v-for="hourData in data" :key="hourData.dt">
+      <div v-for="hourData in weatherData" :key="hourData.dt">
         <p>
           <span class="hourly-weather__date">{{ $utils.formatDateObj(hourData.dt, timeZone, true, false, true) }}</span>
           <span class="hourly-weather__data">
@@ -19,7 +19,7 @@
 export default {
   name: 'HourlyWeatherDisplay',
   props: {
-    data: Array,
+    weatherData: Array,
     city: String,
     timeZone: Object,
   },

@@ -1,7 +1,3 @@
-// const getCityId = (data) => {
-//   // if cityNamer
-//   return null
-// }
 
 export const metrics = [
   {

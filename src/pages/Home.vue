@@ -18,7 +18,7 @@
             class="button button-secondary home__dropdown-button"
             v-for="metric in $actions.getMetrics()"
             :key="metric.measurement"
-            v-on:click="() => {
+            @click="() => {
               $actions.updateSelection({'metric': metric});
               if (weatherData){apiCall(`${weatherData.data.lat},${weatherData.data.lon}`)};
               slotProps.toggleExpanded();
@@ -37,7 +37,7 @@
             class="button button-secondary home__dropdown-button"
             v-for="view in $actions.getView()"
             :key="view"
-            v-on:click="() => {
+            @click="() => {
               $actions.updateSelection({'view': view});
               slotProps.toggleExpanded();
             }"
@@ -53,18 +53,19 @@
       <div class="home__results">
         <CurrentWeatherDisplay
           v-if="weatherData && $store.selections.view === 'Current'"
-          :data="weatherData.data.current"
+          :weatherData="weatherData.data.current"
           :timeZone="{label:weatherData.data.timezone, offset: weatherData.data.timezone_offset}"
           :city="cityName"
         />
         <HourlyWeatherDisplay
           v-if="weatherData && $store.selections.view === 'Hourly'"
-          :data="weatherData.data.hourly"
+          :weatherData="weatherData.data.hourly"
           :timeZone="{label:weatherData.data.timezone, offset: weatherData.data.timezone_offset}"
           :city="cityName"
         />
         <DailyWeatherDisplay
-          v-if="weatherData && $store.selections.view === 'Daily'" :data="weatherData.data.daily"
+          v-if="weatherData && $store.selections.view === 'Daily'"
+          :weatherData="weatherData.data.daily"
           :timeZone="{label:weatherData.data.timezone, offset: weatherData.data.timezone_offset}"
           :city="cityName"
         />
@@ -72,7 +73,7 @@
           <div v-for="city in cities" :key="city.lat" class="home__results-city">
             Did you mean: {{city.name}}
             <button
-              v-on:click="() => {
+              @click="() => {
                 cityName = city.name;
                 cities = undefined;
                 apiCall(`${city.coord.lat},${city.coord.lon}`)

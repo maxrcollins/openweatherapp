@@ -6,7 +6,7 @@
       class="button button-primary dropdown-toggle__dropdown-button"
       type="button"
       :aria-expanded="isExpanded.toString()"
-      v-on:click="toggleExpanded()"
+      @click="() => { toggleExpanded() }"
     >
       {{ label }}
     </button>

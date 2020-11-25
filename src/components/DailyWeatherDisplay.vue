@@ -10,14 +10,6 @@
         <span class="bold">{{dayData.label}}</span>
         <div v-for="(dataPoint, key) in dayData.items" :key="key">{{dataPoint}} {{dayData.metric}}</div>
       </div>
-      <!-- <div v-for="dayData in data" :key="dayData.dt">
-        <p>
-          <span class="bold">{{ $utils.formatDateObj(dayData.dt, timeZone, false, true, false) }}</span>,
-          {{ dayData.weather[0].description }},
-          <span class="bold">Day Temp:</span> {{ dayData.temp.day }}&#176;{{ $store.selections.metric.unit }},
-          <span class="bold">Windspeed:</span> {{ dayData.wind_speed }}{{ $store.selections.metric.speed }}
-        </p>
-      </div> -->
     </div>
   </div>
 </template>
@@ -26,7 +18,7 @@
 export default {
   name: 'DailyWeatherDisplay',
   props: {
-    data: Array,
+    weatherData: Array,
     city: String,
     timeZone: Object,
   },
@@ -67,7 +59,7 @@ export default {
         },
       ];
 
-      this.data.map((dayData) => {
+      this.weatherData.map((dayData) => {
         dateTableFramework[0].items.push(this.$utils.formatDateObj(dayData.dt, this.timeZone, false, true, false));
         dateTableFramework[1].items.push(dayData.weather[0].description);
         dateTableFramework[2].items.push(dayData.temp.max);
