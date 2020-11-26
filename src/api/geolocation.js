@@ -7,7 +7,6 @@ export default function getGeoLocation(callbackFunction) {
     navigator.geolocation.getCurrentPosition(callbackFunction);
   }
   else {
-    // Handle
-    console.log('load failed ');
+    log.debug('load failed');
   }
 }

@@ -5,15 +5,20 @@ $red: #d41730;
 $light-blue: #6bc9ff;
 $dark-blue: #010175;
 $secondary: #42b983;
+$yellow: #ffff21;
 
 $white: #fff;
 $black: #000;
 $dark-gray: #333;
-$light-gray: #ddd;
+$lighter-gray: #666;
+$lightest-gray: #999;
+$off-white: #ddd;
 $transparent: #0000;
 
 // font
 $base-font-size: 1rem;
+$font-size-lg: $base-font-size * 1.125;
+
 $h1-font-size: $base-font-size * 4;
 $h2-font-size: $base-font-size * 1.5;
 

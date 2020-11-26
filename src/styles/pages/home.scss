@@ -17,7 +17,7 @@
 
         @media only screen and (max-width: $site-lg-breakpoint) {
             flex: 0 0 100%;
-            background-color: $light-gray;
+            background-color: $off-white;
             padding: 1rem;
             border-radius: 4px;
             box-shadow: $box-shadow;
@@ -31,8 +31,8 @@
         justify-content: space-around;
         margin-bottom: 3rem;
     }
+
     &__toggle {
-        //margin-right: 3rem;
         flex: 0 0 30%;
         margin-top: auto;
     }
@@ -57,7 +57,7 @@
         border-radius: 4px;
         box-shadow: $box-shadow;
         padding: 1rem;
-        background: $light-gray;
+        background: $off-white;
         margin-left: 2rem;
 
         @media only screen and (max-width: $site-lg-breakpoint) {
@@ -68,10 +68,8 @@
     &__results-city {
         margin-bottom: 1rem;
     }
-    &__sun {
-        position: absolute;
-        top: 0;
-        transform: translate(50%, -50%);
-        right: 0;
+
+    &__error {
+        margin-top: 0.5rem;
     }
 }

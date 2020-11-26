@@ -66,7 +66,7 @@ module.exports = {
        ],
        "max-params": [
           "warn",
-          4
+          5
        ],
        "new-parens": "warn",
        "no-console": "warn",

@@ -2,9 +2,9 @@
   <div v-bind:class="classNames">
     <form v-on:submit.prevent="submitForm" class="search-bar">
       <label class="search-bar__label">
-        Enter the name of a city, city/State Code/Country Code, city/Country Code, or
-        longitude/latitude coordinates, separated by a comma.
-        (eg. 'Stamford', 'Stamford, CT, US', 'Dublin, IR', or '-122.08,37.39')
+        For best results, enter "city", "city, state code", "city, state code, coutnry code",
+        or "latitude, longitude".<br>
+        (eg. 'Stamford', 'Stamford, CT, US', 'Dublin, IR', or '-22.08,37.39')
       </label>
       <div class="search-bar__container">
         <input

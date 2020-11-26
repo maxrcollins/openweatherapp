@@ -1,12 +1,14 @@
-body {
-    margin: 0;
-    background: linear-gradient(to right, $light-blue , $dark-blue);
-}
 
 * {
     box-sizing: border-box;
     text-size-adjust: none;
 }
+
+body {
+    margin: 0;
+    background: linear-gradient(to right, $light-blue , $dark-blue);
+}
+
 
 #app {
     -webkit-font-smoothing: antialiased;

@@ -4,7 +4,7 @@
   left: 0;
   height: 170px;
   width: 170px;
-  background-image: radial-gradient(circle 190px at 0% 10%, white, yellow, transparent, transparent);
+  background-image: radial-gradient(circle 190px at 0% 10%, $white, $yellow, $transparent, $transparent);
   z-index: -1;
 }
 
@@ -14,6 +14,6 @@
   right: 0;
   height: 170px;
   width: 170px;
-  background-image: radial-gradient(circle 190px at 90% 10%, #666 25%, #999 50%, transparent 53%);
+  background-image: radial-gradient(circle 190px at 90% 10%, $lighter-gray 25%, $lightest-gray 50%, $transparent 53%);
   z-index: -1;
 }

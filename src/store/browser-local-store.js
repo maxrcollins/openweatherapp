@@ -2,18 +2,17 @@ export const setLocalStore = (name = 'store', data) => {      // Wrap in debounc
   try {
     window.localStorage.setItem(name, JSON.stringify(data));
   }
-  catch {
-    // ignore
+  catch (e) {
+    log.debug('Error setting local store', e);
   }
 };
 
 
 export const getLocalStore = (name = 'store') => {
-
   try {
     return JSON.parse(window.localStorage.getItem(name)) || {};
   }
-  catch {
-    return {};
+  catch (e) {
+    log.debug('Error getting local store', e);
   }
 };

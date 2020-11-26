@@ -47,7 +47,12 @@
         </DropdownToggle>
       </div>
       <SearchBar :onSubmit="apiCall" />
-      <div :class="!hasErrored && 'is-hidden'">There was an error retrieving your Data. Please try again later</div>
+      <div
+        class="home__error bold"
+        :class="!hasErrored && 'is-hidden'"
+      >
+        There was an error retrieving your Data. Please try again later
+      </div>
     </div>
     <div class="home__results-container">
       <div class="home__results">
@@ -131,7 +136,6 @@ export default {
       const isCoordinates = /^(-?\d+(\.\d+)?),\s*(-?\d+(\.\d+)?)$/;
 
       try {
-
         if (location === '') {
           this.weatherData = await getDataByCoordinates({
             lat: this.currentCoordinates.lat,
