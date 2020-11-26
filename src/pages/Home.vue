@@ -53,6 +53,13 @@
       >
         There was an error retrieving your Data. Please try again later
       </div>
+            <div
+        class="home__error bold"
+        :class="!geolocationError && 'is-hidden'"
+      >
+        ** Please allow for the window to view your current location in order for the geolocator to
+        find your current location.
+      </div>
     </div>
     <div class="home__results-container">
       <div class="home__results">
@@ -123,6 +130,7 @@ export default {
       cities: undefined,
       cityName: undefined,
       hasErrored: false,
+      geolocationError: false,
       currentCoordinates: undefined,
     };
   },
@@ -181,10 +189,14 @@ export default {
     },
     setCurrentLocation(position) {
       this.currentCoordinates = { lat: position.coords.latitude, lon: position.coords.longitude };
+      this.geolocationError = false;
+    },
+    locationError() {
+      this.geolocationError = true;
     },
   },
   mounted() {
-    getGeoLocation(this.setCurrentLocation);
+    getGeoLocation(this.setCurrentLocation, this.locationError);
   },
 };
 </script>
