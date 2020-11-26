@@ -2,7 +2,7 @@
   <div v-bind:class="classNames">
     <form v-on:submit.prevent="submitForm" class="search-bar">
       <label class="search-bar__label">
-        For best results, enter "city", "city, state code", "city, state code, coutnry code",
+        For best results, enter "city", "city, state code", "city, state code, country code",
         or "latitude, longitude".<br>
         (eg. 'Stamford', 'Stamford, CT, US', 'Dublin, IR', or '-22.08,37.39')
       </label>
