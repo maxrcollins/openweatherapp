@@ -1,8 +1,7 @@
-
+# Open Weather App
 ##
 To run, this project only requires:
-Node
-Yarn
+Node and Yarn
 
 ## Project setup
 yarn install
